@@ -24,7 +24,9 @@
 {
     return [UIAlertAction actionWithTitle:self.title style:self.style handler:^(UIAlertAction *alertAction){
         beforeHandlerBlock();
-        self.handler(self);
+        if (self.handler){
+            self.handler(self);
+        }
     }];
 }
 
