@@ -53,13 +53,13 @@
 
 +(void)displayAlertWithTitle:(NSString *)title message:(NSString *)message alertActions:(NSArray *)alertActions presentingViewController:(UIViewController *)presentingViewController cancelButtonIndex:(NSInteger)cancelButtonIndex
 {
-    if ([self isBeforeIOS8])
+    if ([self isAfterIOS8])
     {
-        [self displayOldStyleAlertWithTitle:title message:message alertActions:alertActions cancelButtonIndex:cancelButtonIndex];
+        [self displayNewAlertWithTitle:title message:message alertActions:alertActions presentingViewController:presentingViewController];
     }
     else
     {
-        [self displayNewAlertWithTitle:title message:message alertActions:alertActions presentingViewController:presentingViewController];
+        [self displayOldStyleAlertWithTitle:title message:message alertActions:alertActions cancelButtonIndex:cancelButtonIndex];
     }
     
 }
@@ -126,10 +126,10 @@
     return sharedInstance;
 }
 
-+(BOOL)isBeforeIOS8
++(BOOL)isAfterIOS8
 {
-    NSComparisonResult comparedToIOS7 = [[UIDevice currentDevice].systemVersion compare:@"7.1" options:NSNumericSearch];
-    return comparedToIOS7 == NSOrderedAscending || comparedToIOS7 == NSOrderedSame;
+    NSComparisonResult comparedToIOS8 = [[UIDevice currentDevice].systemVersion compare:@"8.0" options:NSNumericSearch];
+    return comparedToIOS8 == NSOrderedDescending || comparedToIOS8 == NSOrderedSame;
 }
 
 + (UIViewController*) topMostController
